@@ -1,0 +1,15 @@
+D:\Workspace\balta\FundamentosOO\OOP\bin\Debug\net6.0\OOP.exe
+D:\Workspace\balta\FundamentosOO\OOP\bin\Debug\net6.0\OOP.deps.json
+D:\Workspace\balta\FundamentosOO\OOP\bin\Debug\net6.0\OOP.runtimeconfig.json
+D:\Workspace\balta\FundamentosOO\OOP\bin\Debug\net6.0\OOP.dll
+D:\Workspace\balta\FundamentosOO\OOP\bin\Debug\net6.0\OOP.pdb
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\OOP.csproj.AssemblyReference.cache
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\OOP.GeneratedMSBuildEditorConfig.editorconfig
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\OOP.AssemblyInfoInputs.cache
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\OOP.AssemblyInfo.cs
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\OOP.csproj.CoreCompileInputs.cache
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\OOP.dll
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\refint\OOP.dll
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\OOP.pdb
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\OOP.genruntimeconfig.cache
+D:\Workspace\balta\FundamentosOO\OOP\obj\Debug\net6.0\ref\OOP.dll
