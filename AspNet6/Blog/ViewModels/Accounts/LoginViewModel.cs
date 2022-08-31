@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Blog.ViewModels;
+namespace Blog.ViewModels.Accounts;
 
-public class RegisterViewModel
+public class LoginViewModel
 {
     [Required]
-    public string Name { get; set; }
+    public string Password { get; set; }
     
     [Required]
     [EmailAddress]
