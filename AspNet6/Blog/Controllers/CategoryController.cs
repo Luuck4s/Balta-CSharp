@@ -5,27 +5,46 @@ using Blog.ViewModels;
 using Blog.ViewModels.Categories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Blog.Controllers;
 
 [ApiController]
 public class CategoryController : ControllerBase
 {
+
+    private readonly IMemoryCache _cache;
+    private readonly BlogDataContext _context;
+
+    public CategoryController(BlogDataContext context, IMemoryCache cache)
+    {
+        _context = context;
+        _cache = cache;
+    }
     [HttpGet("v1/categories")]
     public async Task<IActionResult> GetAsync(
-        [FromServices] BlogDataContext context)
+        )
     {
-        var categories = await context.Categories.ToListAsync();
+        var categories = _cache.GetOrCreate("CategoriesCache", entry =>
+        {
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+            return GetCategories();
+        });
         return Ok(new ResultViewModel<List<Category>>(categories));
+    }
+
+    private List<Category> GetCategories()
+    {
+        return _context.Categories.ToList();
     }
 
 
     [HttpGet("v1/categories/{id:int}")]
     public async Task<IActionResult> GetByIdAsync(
-        [FromRoute] int id,
-        [FromServices] BlogDataContext context)
+        [FromRoute] int id
+        )
     {
-        var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+        var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
 
         if (category is null)
         {
@@ -37,8 +56,8 @@ public class CategoryController : ControllerBase
 
     [HttpPost("v1/categories")]
     public async Task<IActionResult> PostAsync(
-        [FromBody] EditorCategoryViewModel model,
-        [FromServices] BlogDataContext context)
+        [FromBody] EditorCategoryViewModel model
+        )
     {
         if (!ModelState.IsValid)
         {
@@ -52,8 +71,8 @@ public class CategoryController : ControllerBase
                 Name = model.Name,
                 Slug = model.Slug.ToLower(),
             };
-            await context.Categories.AddAsync(category);
-            await context.SaveChangesAsync();
+            await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
 
             return Created($"v1/categories/{category.Id}",  new ResultViewModel<Category>(category));
         }
@@ -70,12 +89,12 @@ public class CategoryController : ControllerBase
     [HttpPut("v1/categories/{id:int}")]
     public async Task<IActionResult> PutAsync(
         [FromRoute] int id,
-        [FromBody] EditorCategoryViewModel model,
-        [FromServices] BlogDataContext context)
+        [FromBody] EditorCategoryViewModel model
+        )
     {
         try
         {
-            var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
 
             if (category is null)
             {
@@ -85,8 +104,8 @@ public class CategoryController : ControllerBase
             category.Name = model.Name;
             category.Slug = model.Slug;
 
-            context.Categories.Update(category);
-            await context.SaveChangesAsync();
+            _context.Categories.Update(category);
+            await _context.SaveChangesAsync();
 
             return Ok(new ResultViewModel<Category>(category));
         }
@@ -102,12 +121,12 @@ public class CategoryController : ControllerBase
 
     [HttpDelete("v1/categories/{id:int}")]
     public async Task<IActionResult> PutAsync(
-        [FromRoute] int id,
-        [FromServices] BlogDataContext context)
+        [FromRoute] int id
+        )
     {
         try
         {
-            var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
 
             if (category is null)
             {
@@ -115,8 +134,8 @@ public class CategoryController : ControllerBase
             }
 
 
-            context.Categories.Remove(category);
-            await context.SaveChangesAsync();
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }

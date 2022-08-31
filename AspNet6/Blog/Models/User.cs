@@ -10,7 +10,7 @@ namespace Blog.Models
         public string Slug { get; set; }
         public string Bio { get; set; }
 
-        public IList<Post> Posts { get; set; }
-        public IList<Role> Roles { get; set; }
+        public IList<Post> Posts { get; set; } = new List<Post>();
+        public IList<Role> Roles { get; set; } = new List<Role>();
     }
 }
