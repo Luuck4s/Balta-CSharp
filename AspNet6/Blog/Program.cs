@@ -6,6 +6,7 @@ using Blog.Data;
 using Blog.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 
@@ -14,15 +15,25 @@ ConfigureAuthentication(builder);
 ConfigureMvc(builder);
 ConfigureServices(builder);
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 LoadConfiguration(app);
 
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseResponseCompression();
 app.MapControllers();
 app.UseStaticFiles();
+app.UseResponseCompression();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.Run();
 
 
@@ -80,7 +91,6 @@ void ConfigureMvc(WebApplicationBuilder builderApplication)
             x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
         });
-    builderApplication.Services.AddDbContext<BlogDataContext>();
 }
 
 void ConfigureServices(WebApplicationBuilder builderApplication)
@@ -89,6 +99,12 @@ void ConfigureServices(WebApplicationBuilder builderApplication)
     // builderApplication.Services.AddScoped(); dura durante uma requisição após isso é finalizado 
     // builderApplication.Services.AddSingleton(); 1 para toda a aplicação, padrão singleton 
 
+    var connectionString = builderApplication.Configuration.GetConnectionString("DefaultConnection");
+    
+    builderApplication.Services.AddDbContext<BlogDataContext>(options =>
+    {
+        options.UseSqlServer(connectionString);
+    });
     builderApplication.Services.AddTransient<TokenService>();
     builderApplication.Services.AddTransient<EmailService>();
 }
