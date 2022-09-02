@@ -1,0 +1,30 @@
+name: Build and deploy package Money Extension
+
+jobs: 
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@main
+
+    - name: Set up .Net Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+    
+    - name: Build With dotnet
+      working-directory: ./GitHubAzureDevOps/MoneyExtension
+      run: dotnet build --configuration Release
+
+    - name: Test
+      working-directory: ./GitHubAzureDevOps/MoneyExtension
+      run: dotnet test
+    
+    - name: Create the package
+      working-directory: ./GitHubAzureDevOps/MoneyExtension 
+      run: dotnet pack --configuration Release
+    
+    - name: Publish
+      working-directory: ./GitHubAzureDevOps/MoneyExtension 
+      run: dotnet nuget push "MoneyExtension/bin/Release/*.nupkg" -k ${{ secrets.NUGET_API_KEY}} -S https://api.nuget.org/v3/index.json
+    
