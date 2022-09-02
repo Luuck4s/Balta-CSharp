@@ -1,5 +1,10 @@
 name: Build and deploy package Money Extension
 
+on:
+  push:
+    branch: 
+      - main
+
 jobs: 
   build-and-deploy:
     runs-on: ubuntu-latest
