@@ -31,5 +31,5 @@ jobs:
     
     - name: Publish
       working-directory: ./GitHubAzureDevOps/MoneyExtension 
-      run: dotnet nuget push "MoneyExtension/bin/Release/*.nupkg" -k ${{ secrets.NUGET_API_KEY}} -S https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "MoneyExtension/bin/Release/*.nupkg" -k ${{ secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
     
