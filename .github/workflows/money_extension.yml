@@ -29,7 +29,11 @@ jobs:
       working-directory: ./GitHubAzureDevOps/MoneyExtension 
       run: dotnet pack --configuration Release
     
-    - name: Publish
+    - name: Publish on Nuget
       working-directory: ./GitHubAzureDevOps/MoneyExtension 
-      run: dotnet nuget push "MoneyExtension/bin/Release/*.nupkg" -k ${{ secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "MoneyExtension/bin/Release/*.nupkg" -k ${{ secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
+    
+    - name: Publish on Github Packages
+      working-directory: ./GitHubAzureDevOps/MoneyExtension
+      run: dotnet nuget push "MoneyExtension/bin/Release/*.nupkg" -k ${{ secrets.GITHUB_TOKEN}} -s https://nuget.pkg.github.com/Luuck4s/index.json --skip-duplicate
     
