@@ -9,6 +9,9 @@ public class CreditCardPayment : Payment
     public string LastTransactionNumber { get; private set; }
 
     public CreditCardPayment(
+        string cardHolderName,
+        string cardNumber,
+        string lastTransactionNumber,
         DateTime paidDate,
         DateTime expireDate,
         decimal total,
@@ -16,11 +19,8 @@ public class CreditCardPayment : Payment
         Document document,
         string payer,
         Address address,
-        Email email,
-        string cardHolderName,
-        string cardNumber,
-        string lastTransactionNumber
-    ) : base(
+        Email email
+        ) : base(
         paidDate,
         expireDate,
         total,
