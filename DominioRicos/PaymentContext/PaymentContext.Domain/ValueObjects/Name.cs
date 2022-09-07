@@ -1,4 +1,5 @@
-﻿using PaymentContext.Shared.ValueObjects;
+﻿using Flunt.Validations;
+using PaymentContext.Shared.ValueObjects;
 
 namespace PaymentContext.Domain.ValueObjects;
 
@@ -11,15 +12,26 @@ public class Name : ValueObject
     {
         FirstName = firstName;
         LastName = lastName;
+        
 
-        if (string.IsNullOrEmpty(FirstName))
-        {
-            AddNotification("Name.FirstName", "Invalid Name");
-        }
+        AddNotifications(
+            new Contract<Name>()
+                .Requires()
+                .IsNotNullOrEmpty(
+                    FirstName, 
+                    "Name.FirstName", 
+                "Invalid First Name"),
+                new Contract<Name>()
+                .Requires()
+                .IsNotNullOrEmpty(
+                    LastName, 
+                    "Name.LastName", 
+                    "Invalid Last Name")
+            );
+    }
 
-        if (string.IsNullOrEmpty(LastName))
-        {
-            AddNotification("Name.LastName", "Invalid Last Name");
-        }
+    public override string ToString()
+    {
+        return $"{FirstName} {LastName}";
     }
 }
