@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PaymentContext.Domain.Entities;
-using PaymentContext.Domain.Enuns;
+using PaymentContext.Domain.Enums;
 using PaymentContext.Domain.Handlers;
 using PaymentContext.Domain.ValueObjects;
 

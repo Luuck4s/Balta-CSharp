@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PaymentContext.Domain.Enuns;
+using PaymentContext.Domain.Enums;
 using Document = PaymentContext.Domain.ValueObjects.Document;
 
 namespace PaymentContext.Tests.ValueObjects;

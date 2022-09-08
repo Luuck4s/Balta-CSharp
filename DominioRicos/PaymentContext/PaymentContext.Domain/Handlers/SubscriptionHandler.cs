@@ -1,7 +1,7 @@
 ﻿using Flunt.Notifications;
 using PaymentContext.Domain.Commands;
 using PaymentContext.Domain.Entities;
-using PaymentContext.Domain.Enuns;
+using PaymentContext.Domain.Enums;
 using PaymentContext.Domain.Repositories.Student;
 using PaymentContext.Domain.Services.Email;
 using PaymentContext.Domain.ValueObjects;

@@ -1,4 +1,4 @@
-﻿namespace PaymentContext.Domain.Enuns;
+﻿namespace PaymentContext.Domain.Enums;
 
 public enum EDocumentType
 {

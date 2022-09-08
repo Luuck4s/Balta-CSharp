@@ -1,6 +1,6 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
-using PaymentContext.Domain.Enuns;
+using PaymentContext.Domain.Enums;
 using PaymentContext.Shared.Commands;
 
 
