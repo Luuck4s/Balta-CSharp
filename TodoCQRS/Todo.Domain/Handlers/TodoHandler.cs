@@ -10,7 +10,9 @@ namespace Todo.Domain.Handlers;
 public class TodoHandler :
     Notifiable<Notification>,
     IHandler<CreateTodoCommand>,
-    IHandler<UpdateTodoCommand>
+    IHandler<UpdateTodoCommand>,
+    IHandler<MakeTodoAsDoneCommand>,
+    IHandler<MakeTodoAsUndoneCommand>
 {
     private readonly ITodoRepository _repository;
 
@@ -25,6 +27,7 @@ public class TodoHandler :
 
         if (command.IsValid is false)
         {
+            AddNotification("Command", "Invalid Command");
             return new GenericCommandResult(false, "Whops, invalid todo", command.Notifications);
         }
 
@@ -40,6 +43,76 @@ public class TodoHandler :
 
     public ICommandResult Handle(UpdateTodoCommand command)
     {
-        throw new NotImplementedException();
+        command.Validate();
+
+        if (command.IsValid is false)
+        {
+            AddNotification("Command", "Invalid Command");
+            return new GenericCommandResult(false, "Whops, invalid todo", command.Notifications);
+        }
+
+        var todo = _repository.GetById(command.Id, command.User);
+
+        if (todo is null)
+        {
+            AddNotification("Todo", "Todo not found");
+            return new GenericCommandResult(false, "Whops, invalid todo", command.Notifications);
+        }
+
+        todo.UpdateTile(command.Title);
+        
+        _repository.Update(todo);
+        
+        return new GenericCommandResult(true, "ToDo created", todo);
+    }
+
+    public ICommandResult Handle(MakeTodoAsDoneCommand command)
+    {
+        command.Validate();
+
+        if (command.IsValid is false)
+        {
+            AddNotification("Command", "Invalid Command");
+            return new GenericCommandResult(false, "Whops, invalid todo", command.Notifications);
+        }
+
+        var todo = _repository.GetById(command.Id, command.User);
+
+        if (todo is null)
+        {
+            AddNotification("Todo", "Todo not found");
+            return new GenericCommandResult(false, "Whops, invalid todo", command.Notifications);
+        }
+
+        todo.MarkAsDone();
+        
+        _repository.Update(todo);
+        
+        return new GenericCommandResult(true, "ToDo created", todo);
+    }
+
+    public ICommandResult Handle(MakeTodoAsUndoneCommand command)
+    {
+        command.Validate();
+
+        if (command.IsValid is false)
+        {
+            AddNotification("Command", "Invalid Command");
+            return new GenericCommandResult(false, "Whops, invalid todo", command.Notifications);
+        }
+
+        var todo = _repository.GetById(command.Id, command.User);
+
+        if (todo is null)
+        {
+            AddNotification("Todo", "Todo not found");
+            return new GenericCommandResult(false, "Whops, invalid todo", command.Notifications);
+        }
+
+        todo.MarkAsUndone();
+        
+        _repository.Update(todo);
+        
+        return new GenericCommandResult(true, "ToDo created", todo);
     }
 }
