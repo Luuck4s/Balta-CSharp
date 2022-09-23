@@ -63,7 +63,7 @@ public class TodoHandler :
         
         _repository.Update(todo);
         
-        return new GenericCommandResult(true, "ToDo created", todo);
+        return new GenericCommandResult(true, "ToDo updated", todo);
     }
 
     public ICommandResult Handle(MakeTodoAsDoneCommand command)
@@ -88,7 +88,7 @@ public class TodoHandler :
         
         _repository.Update(todo);
         
-        return new GenericCommandResult(true, "ToDo created", todo);
+        return new GenericCommandResult(true, "ToDo updated", todo);
     }
 
     public ICommandResult Handle(MakeTodoAsUndoneCommand command)
@@ -113,6 +113,6 @@ public class TodoHandler :
         
         _repository.Update(todo);
         
-        return new GenericCommandResult(true, "ToDo created", todo);
+        return new GenericCommandResult(true, "ToDo updated", todo);
     }
 }
