@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Todo.Infra.Contexts;
-
-namespace Todo.Api.Configuration;
+﻿namespace Todo.Api.Configuration;
 
 public static class ConfigurationServiceCollectionExtensions
 {
