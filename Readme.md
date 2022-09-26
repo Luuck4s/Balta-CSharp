@@ -13,6 +13,8 @@ Introdução sobre DevOps, conceitos de pipeline e como publicar pacotes nuget
 ### :books: [Domínios Ricos](https://github.com/Luuck4s/Balta-CSharp/tree/main/DominioRicos/PaymentContext)
 Introdução a modelagem de domínios ricos e início sobre testes. 
 
-### :books: [Refatorando para Testes de Unidade](https://github.com/Luuck4s/Balta-CSharp/tree/main/TestesUnidade/Store)
+### :fire: [Refatorando para Testes de Unidade](https://github.com/Luuck4s/Balta-CSharp/tree/main/TestesUnidade/Store)
 Introdução sobre testes de unidade e como podemos separar nosso código usando princípios do CQRS. 
 
+### :tada: [TODO CQRS](https://github.com/Luuck4s/Balta-CSharp/tree/main/TodoCQRS)
+Projeto de TODO utilizando CQRS e login com google.
