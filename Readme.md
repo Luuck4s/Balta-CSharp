@@ -7,6 +7,9 @@ Introdução sobre OO e C#/Asp.net
 ### :stars: [Asp.net 6](https://github.com/Luuck4s/Balta-CSharp/tree/main/AspNet6)
 Conteúdo sobre o Asp.net 6, mudanças que ocorreram e como podemos realizar algumas configurações
 
+### :chart_with_upwards_trend: [Entity Framework](https://github.com/Luuck4s/Balta-CSharp/tree/main/EntityFramework)
+Entity Framework.
+
 ### :card_index: [Github Azure Devops](https://github.com/Luuck4s/Balta-CSharp/tree/main/GitHubAzureDevOps/MoneyExtension)
 Introdução sobre DevOps, conceitos de pipeline e como publicar pacotes nuget
 
